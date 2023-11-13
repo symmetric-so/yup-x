@@ -47,6 +47,9 @@
 		"@types/express": "^4.17.17"
 	},
 	"description": "Spin up Express CRUD servers from simple yup schema definitions",
+	"files": [
+		"**/*"
+	],
 	"homepage": "https://github.com/symmetric-so/yup-x",
 	"keywords": [
 		"yup",
@@ -69,5 +72,5 @@
 	},
 	"type": "module",
 	"types": "./lib",
-	"version": "0.0.2"
+	"version": "0.0.3"
 }
