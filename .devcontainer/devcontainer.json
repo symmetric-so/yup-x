@@ -1,0 +1,15 @@
+{
+	"build": {
+		"dockerfile": "../Dockerfile",
+		"context": ".."
+	},
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"terminal.integrated.shell.linux": "/bin/bash"
+			}
+		}
+	},
+	"forwardPorts": [3001],
+	"name": "YupX Dev Container"
+}
