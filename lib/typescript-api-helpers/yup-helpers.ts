@@ -13,7 +13,10 @@ import {
 	isUtcDate,
 	isWebHost,
 	isWebUrl,
+	getDocumentIdString,
+	isDocumentIdString,
 } from '../data-format-helpers';
+import * as UUID from 'uuid';
 
 export const YupTypeEnum = TsHelpers.getEnum([
 	'array',
@@ -135,3 +138,69 @@ export const YupHelpers = {
 			})
 			.default(''),
 } as const;
+
+export const getApiObjectYupHelpers = <ApiObjectCollection extends string>(
+	_: ApiObjectCollection[],
+) =>
+	({
+		id: (_object: ApiObjectCollection) =>
+			yup
+				.string()
+				.default(() => getDocumentIdString(_object))
+				.test({
+					message: ({ path, value }: { path: string; value: string }) =>
+						`${path} is not a uuid: ${value}`,
+					name: 'is-uuid',
+					test: (value) => isDocumentIdString([_object], value),
+				})
+				.meta({ _object }),
+		ids: (_object: ApiObjectCollection) =>
+			YupHelpers.array(
+				yup
+					.string()
+					.default(() => UUID.v4())
+					.test({
+						message: ({ path, value }: { path: string; value: string }) =>
+							`${path} is not a uuid: ${value}`,
+						name: 'is-uuid',
+						test: (value) => isDocumentIdString([_object], value),
+					})
+					.meta({ _object }),
+			),
+		idRef: (allowObjects: ApiObjectCollection[]) =>
+			yup
+				.string()
+				.default('')
+				.test({
+					message: ({ path, value }: { path: string; value: string }) =>
+						`${path} is not a uuid: ${value}`,
+					name: 'is-uuid',
+					test: (value) => isDocumentIdString(allowObjects, value),
+				})
+				.meta({ allowObjects }),
+		idRefs: (allowObjects: ApiObjectCollection[]) =>
+			YupHelpers.array(
+				yup
+					.string()
+					.defined()
+					.test({
+						message: ({ path, value }: { path: string; value: string }) =>
+							`${path} is not a uuid: ${value}`,
+						name: 'is-uuid',
+						test: (value) =>
+							typeof value === 'string' &&
+							isDocumentIdString(allowObjects, value),
+					})
+					.meta({ allowObjects }),
+			).defined(),
+		userIdRef: () =>
+			yup
+				.string()
+				.test({
+					message: ({ path, value }: { path: string; value: string }) =>
+						`${path} is not a uuid: ${value}`,
+					name: 'is-uuid',
+					test: (value) => isDocumentIdString(['user'], value),
+				})
+				.defined(),
+	} as const);
