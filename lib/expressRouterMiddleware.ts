@@ -10,7 +10,7 @@ import {
 import {
 	isTsErrorResponse,
 	TsResponse,
-	toTsErrorResponse,
+	getTsErrorResponse,
 	getTsErrorFn,
 } from './typescript-helpers/function-response-helpers';
 
@@ -74,7 +74,7 @@ export const validateWrite =
 					: JSON.stringify(validationError);
 			res.locals = {
 				...res.locals,
-				...toTsErrorResponse(getTsErrorFn('request.invalid-params'), msg),
+				...getTsErrorResponse(getTsErrorFn('request.invalid-params'), msg),
 			};
 			return next();
 		}

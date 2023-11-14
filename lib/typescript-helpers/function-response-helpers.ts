@@ -56,12 +56,12 @@ export type TsResponse<T = unknown> = {
 	errors: TsError[];
 };
 
-export const toTsErrorResponse = <T = unknown>(
-	toTsError = getDefaultTsError,
+export const getTsErrorResponse = <T = unknown>(
+	getTsError = getDefaultTsError,
 	msg = '',
 ): TsResponse<T> => ({
 	data: [],
-	errors: [toTsError(msg)],
+	errors: [getTsError(msg)],
 });
 export const isTsErrorResponse = <T = unknown>(
 	response: TsResponse<T>,

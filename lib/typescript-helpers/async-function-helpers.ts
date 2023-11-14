@@ -47,7 +47,7 @@ const _resolveTsPromiseChainWrappers = async ({
 
 export const resolveTsPromiseChain = async (
 	fns: TsPromiseChainFn[],
-	defaultResponse = FunctionResponseHelpers.toTsErrorResponse(),
+	defaultResponse = FunctionResponseHelpers.getTsErrorResponse(),
 ): Promise<TsPromiseChainResponse> => {
 	try {
 		const res: TsPromiseChainResponse = await _resolveTsPromiseChainWrappers({

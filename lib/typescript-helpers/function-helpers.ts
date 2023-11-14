@@ -14,20 +14,20 @@ export type TsParseFn<T = unknown, U = unknown> = (
 type _getTsParseFnProps<T = unknown, U = unknown> = {
 	mapFn: TsMapFn<T, U>;
 	predicateFn: TsPredicateFn;
-	toTsError?: () => FunctionResponseHelpers.TsError;
+	getTsError?: () => FunctionResponseHelpers.TsError;
 };
 export const getTsParseFn =
 	<T = unknown, U = unknown>({
 		mapFn,
 		predicateFn,
-		toTsError,
+		getTsError,
 	}: _getTsParseFnProps<T, U>): TsParseFn<T, U> =>
 	(value) => {
 		if (predicateFn(value)) {
 			const res = mapFn(value);
 			return { data: Array.isArray(res) ? res : [res], errors: [] };
 		}
-		return FunctionResponseHelpers.toTsErrorResponse(toTsError);
+		return FunctionResponseHelpers.getTsErrorResponse(getTsError);
 	};
 
 type _TsCastFnResponse<T = unknown, U = unknown> = TsParseFnResponse<

@@ -5,6 +5,7 @@ import {
 	initResLocals,
 	sendResponse,
 	logResponse,
+	validateOwner,
 } from './expressMiddlewareHelpers';
 import { getExpressRouter } from './expressRouterHelpers';
 import { ApiObjectSpec } from './typescript-api-helpers';
@@ -16,6 +17,7 @@ export const getExpressApp = (apiSpecs: ApiObjectSpec[]) => {
 	app.use(express.json());
 	app.use(allowDebugRequests());
 	app.use(initResLocals());
+	app.use(validateOwner());
 	apiSpecs.forEach((apiObjectSpec) => {
 		const { apiObjectBaseEndpoint } = apiObjectSpec;
 		app.options(`*/v0/${apiObjectBaseEndpoint}`, corsPolicy);

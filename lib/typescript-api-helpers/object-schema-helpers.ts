@@ -91,3 +91,16 @@ export type BaseUpdateOperation = {
 // DB Helpers
 export const WriteOperationEnum = TsHelpers.getEnum(['create', 'update']);
 export type WriteOperation = keyof typeof WriteOperationEnum.obj;
+
+// Authentication Helpers
+export const AUTH_DATABASE_ID = '(default)';
+export const AUTH_USER_COLLECTION_ID = 'auth_user';
+export type AuthUser = BaseApiObject & {
+	_object: 'auth_user';
+};
+export const AUTH_USER_API_KEY_COLLECTION_ID = 'auth_user_api_key';
+export type AuthUserApiKey = BaseApiObject & {
+	_object: 'auth_user_api_key';
+	hashed_api_key: string;
+	revoked: boolean;
+};

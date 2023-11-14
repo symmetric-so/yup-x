@@ -11,7 +11,7 @@ import {
 	isFile,
 	getAlphabetizedObject,
 	getTsErrorFn,
-	toTsErrorResponse,
+	getTsErrorResponse,
 } from './typescript-helpers';
 
 export type RouterFnStaticProps = {
@@ -54,7 +54,7 @@ const retrieveAllFromLocalDb: RouterFn = async ({
 		if (!isFile(apiObjectCollectionFilePath)) {
 			writeFileSync(apiObjectCollectionFilePath, '[]');
 			return Promise.resolve(
-				toTsErrorResponse(getTsErrorFn('collection.empty')),
+				getTsErrorResponse(getTsErrorFn('collection.empty')),
 			);
 		}
 
@@ -67,7 +67,7 @@ const retrieveAllFromLocalDb: RouterFn = async ({
 		) as BaseApiObject[];
 		if (apiObjectCollection.length === 0)
 			return Promise.resolve(
-				toTsErrorResponse(getTsErrorFn('collection.empty')),
+				getTsErrorResponse(getTsErrorFn('collection.empty')),
 			);
 		return Promise.resolve({ data: apiObjectCollection, errors: [] });
 	} catch (err) {

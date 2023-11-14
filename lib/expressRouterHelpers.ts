@@ -4,7 +4,7 @@ import * as ExpressRouterFunctionHelpers from './expressRouterFunctions';
 import {
 	TsResponse,
 	isTsErrorResponse,
-	toTsErrorResponse,
+	getTsErrorResponse,
 } from './typescript-helpers';
 
 const _setResLocals = async ({
@@ -21,7 +21,7 @@ const _setResLocals = async ({
 		const routerFnResponse = await routerFn(routerFnProps);
 		res.locals = { ...res.locals, ...routerFnResponse };
 	} catch (msg) {
-		res.locals = { ...res.locals, ...toTsErrorResponse() };
+		res.locals = { ...res.locals, ...getTsErrorResponse() };
 	}
 };
 
