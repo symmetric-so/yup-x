@@ -64,7 +64,7 @@
 	"name": "yup-x",
 	"scripts": {
 		"build": "tsc --build ./tsconfig.json",
-		"format": "prettier --write .",
+		"format": "doctoc . && prettier --write .",
 		"lint": "eslint . --ext .ts",
 		"prepare": "husky install",
 		"test": "npx jest --config='./jest.config.json' --verbose",
