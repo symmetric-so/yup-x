@@ -43,6 +43,13 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
+- [Quick Start](#quick-start)
+- [Description](#description)
+- [Authors](#authors)
+- [License](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## Quick Start
 
 Check out our [recipes repo](https://github.com/symmetric-so/yup-x-recipes) to learn how everything works.
